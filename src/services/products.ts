@@ -1,18 +1,16 @@
-import modelInsertProduct from '../models/products';
+import { INewProduct } from '../interfaces';
+import * as models from '../models/products';
 
-interface INewProduct{
-  id: number;
-  name: string;
-  amount: string;
+export async function getAllProducts():Promise<INewProduct[]> {
+  const result = await models.getAllProducts();
+  return result;
 }
 
-async function serviceInsertProduct(name:string, amount:string):Promise<INewProduct> {
-  const result = await modelInsertProduct(name, amount);
+export async function insertProduct(name: string, amount: string):Promise<INewProduct> {
+  const result = await models.insertProduct(name, amount);
   return {
     id: result,
     name,
     amount,
   };
 }
-
-export default serviceInsertProduct;

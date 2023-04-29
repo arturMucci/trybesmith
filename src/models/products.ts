@@ -1,18 +1,20 @@
 import { RowDataPacket } from 'mysql2';
 import connection from './connection';
+import { IMeta, INewProduct } from '../interfaces';
 
-interface IMeta {
-  insertId: number;
+export async function getAllProducts():Promise<INewProduct[]> {
+  const [allProducts] = await connection
+    .execute<INewProduct[] & RowDataPacket[]>('SELECT * FROM Trybesmith.products;');
+
+  return allProducts;
 }
 
-async function modelInsertProduct(name:string, amount:string):Promise<number> {
-  const [result] = await connection
+export async function insertProduct(name:string, amount:string):Promise<number> {
+  const [insertedProduct] = await connection
     .execute<IMeta & RowDataPacket[]>(
     'INSERT INTO Trybesmith.products (name, amount) values (?, ?);',
     [name, amount],
   );
 
-  return result.insertId;
+  return insertedProduct.insertId;
 }
-
-export default modelInsertProduct;
