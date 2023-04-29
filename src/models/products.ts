@@ -4,7 +4,9 @@ import { IMeta, INewProduct } from '../interfaces';
 
 export async function getAllProducts():Promise<INewProduct[]> {
   const [allProducts] = await connection
-    .execute<INewProduct[] & RowDataPacket[]>('SELECT * FROM Trybesmith.products;');
+    .execute<INewProduct[] & RowDataPacket[]>(
+    'SELECT * FROM Trybesmith.products;',
+  );
 
   return allProducts;
 }

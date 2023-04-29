@@ -2,10 +2,6 @@ import { RowDataPacket } from 'mysql2';
 import connection from './connection';
 import { IMeta, IUser } from '../interfaces';
 
-export async function getAll() {
-  console.log('japão');
-}
-
 export async function insertUser(body:IUser):Promise<number> {
   const { username, vocation, level, password } = body;
   const [insertedUser] = await connection.execute<IMeta & RowDataPacket[]>(
@@ -20,3 +16,7 @@ export async function insertUser(body:IUser):Promise<number> {
 
   return insertedUser.insertId;
 }
+
+export default {
+  insertUser,
+};

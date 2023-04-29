@@ -6,6 +6,12 @@ export interface IToken {
   token: string;
 }
 
+export interface INewOrder {
+  id: number;
+  userId: number;
+  productsIds: number[];
+}
+
 export interface IUser {
   username: string;
   vocation: string;
