@@ -1,16 +1,21 @@
 import express from 'express';
-import * as productController from '../controllers/products';
+import {
+  getAllProducts,
+  insertProduct,
+} from '../controllers/products';
+import validateProduct from '../middlewares/validateProduct';
 
 const productRouter = express.Router();
 
 productRouter.get(
   '/',
-  productController.getAllProducts,
+  getAllProducts,
 );
 
 productRouter.post(
   '/',
-  productController.insertProduct,
+  validateProduct,
+  insertProduct,
 );
 
 export default productRouter;
