@@ -5,7 +5,12 @@ import { IMeta, IUser } from '../interfaces';
 export async function insertUser(body:IUser):Promise<number> {
   const { username, vocation, level, password } = body;
   const [insertedUser] = await connection.execute<IMeta & RowDataPacket[]>(
-    'INSERT INTO Trybesmith.users (username, vocation, level, password) values (?, ?, ?, ?);',
+    `
+    INSERT INTO
+      Trybesmith.users (username, vocation, level, password)
+    VALUES
+      (?, ?, ?, ?);
+    `,
     [
       username,
       vocation,

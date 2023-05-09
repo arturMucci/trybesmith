@@ -32,3 +32,13 @@ export interface INewProduct {
   name: string;
   amount: string;
 }
+
+export interface ILogin {
+  username: string;
+  password: string;
+}
+
+export interface IError {
+  status: number;
+  message: string;
+}
